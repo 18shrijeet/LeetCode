@@ -1,0 +1,35 @@
+Given a Binary Search Tree and a target number, return true if there exist two elements in the BST such that their sum is equal to the given target.
+
+Example 1:
+
+Input: 
+    5
+   / \
+  3   6
+ / \   \
+2   4   7
+
+Target = 9
+
+Output: True
+
+
+------------------------------------------------------------------------------
+
+Solution
+
+class Solution:
+    def findTarget(self, root, k):
+        num = set()
+        return self.compute(root, k, num)
+    
+    
+    def compute(self,root, k, num):
+        if not root:
+            return False
+        if (k-root.val) in num:
+            return True
+        num.add(root.val)
+        left = self.compute(root.left, k, num)
+        right = self.compute(root.right, k, num)
+        return left or right
